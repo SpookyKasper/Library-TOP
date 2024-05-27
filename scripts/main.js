@@ -14,11 +14,34 @@ function addBookToLibrary() {
   myLibrary.push(new Book(title, author))
 }
 
-let coolBook = new Book('Dark Materials', 'Philip Pullman')
-myLibrary.push(coolBook)
-addBookToLibrary()
+function createBookElement() {
+  let bookEl = document.createElement('div')
+  bookEl.className = 'book'
+  return bookEl
+}
 
-console.log(myLibrary)
+let coolBook = new Book('Dark Materials', 'Philip Pullman')
+let lameBook = new Book('Lamo', 'Boring Boris')
+
+myLibrary.push(coolBook)
+myLibrary.push(lameBook)
+
+// addBookToLibrary()
+
+const libraryEl = document.querySelector('.library')
+
 myLibrary.forEach((book) => {
-  console.log(book)
+  let titleEl = document.createElement('span')
+  titleEl.textContent = `Title: ${book.title}`
+  titleEl.className = 'title'
+
+  let authorEl = document.createElement('span')
+  authorEl.textContent = `Author: ${book.author}`
+  authorEl.className = 'author'
+
+  let bookEl = document.createElement('div')
+  bookEl.className = 'book'
+  bookEl.appendChild(titleEl)
+  bookEl.appendChild(authorEl)
+  libraryEl.appendChild(bookEl)
 })
