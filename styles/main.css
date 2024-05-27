@@ -18,8 +18,8 @@ body {
   padding: 15px;
 }
 
-.title, .author {
+.title, .author, .pages, .read {
   font-size: large;
-  border: 2px solid pink;
+  /* border: 2px solid pink; */
   width: 100%;
 }

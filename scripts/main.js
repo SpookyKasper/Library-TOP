@@ -1,10 +1,13 @@
 
 const myLibrary = []
+const libraryEl = document.querySelector('.library')
 
 class Book {
-  constructor(title, author) {
+  constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
+    this.pages = pages
+    this.read = read
   }
 }
 
@@ -20,28 +23,23 @@ function createBookElement() {
   return bookEl
 }
 
+function addBookToDOM(book) {
+  let bookEl = createBookElement()
+  for (let [key, value] of Object.entries(book)) {
+    let propertyEl = document.createElement('span')
+    propertyEl.className = key
+    propertyEl.textContent = `${key} ${value}`
+    bookEl.appendChild(propertyEl)
+  }
+  libraryEl.appendChild(bookEl)
+}
+
 let coolBook = new Book('Dark Materials', 'Philip Pullman')
 let lameBook = new Book('Lamo', 'Boring Boris')
 
 myLibrary.push(coolBook)
 myLibrary.push(lameBook)
 
-// addBookToLibrary()
-
-const libraryEl = document.querySelector('.library')
-
 myLibrary.forEach((book) => {
-  let titleEl = document.createElement('span')
-  titleEl.textContent = `Title: ${book.title}`
-  titleEl.className = 'title'
-
-  let authorEl = document.createElement('span')
-  authorEl.textContent = `Author: ${book.author}`
-  authorEl.className = 'author'
-
-  let bookEl = document.createElement('div')
-  bookEl.className = 'book'
-  bookEl.appendChild(titleEl)
-  bookEl.appendChild(authorEl)
-  libraryEl.appendChild(bookEl)
+  addBookToDOM(book)
 })
