@@ -1,6 +1,11 @@
 
 const myLibrary = []
+
 const libraryEl = document.querySelector('.library')
+const dialogEl = document.querySelector('dialog')
+const dialogFormEl = document.querySelector('.dialog-form')
+const dialogConfirmBtn = document.getElementById('confirmBtn')
+const addBookBtn = document.getElementById('addBookBtn')
 
 class Book {
   constructor(title, author, pages, read) {
@@ -12,23 +17,30 @@ class Book {
 }
 
 function addBookToLibrary() {
-  let title = prompt('Type book title')
-  let author = prompt('Type book author')
-  myLibrary.push(new Book(title, author))
+  let book = new Book()
+  formEls = dialogFormEl.elements
+  for(let el of formEls) {
+    property = el.id
+    if (book.hasOwnProperty(property)) {
+      book[property] = el.value
+    }
+  }
+  myLibrary.push(book)
+  addBookToDOM(book)
 }
 
-function createBookElement() {
+function createBookEl() {
   let bookEl = document.createElement('div')
   bookEl.className = 'book'
   return bookEl
 }
 
 function addBookToDOM(book) {
-  let bookEl = createBookElement()
+  let bookEl = createBookEl()
   for (let [key, value] of Object.entries(book)) {
     let propertyEl = document.createElement('span')
     propertyEl.className = key
-    propertyEl.textContent = `${key} ${value}`
+    propertyEl.textContent = `${key}: ${value}`
     bookEl.appendChild(propertyEl)
   }
   libraryEl.appendChild(bookEl)
@@ -40,6 +52,17 @@ let lameBook = new Book('Lamo', 'Boring Boris')
 myLibrary.push(coolBook)
 myLibrary.push(lameBook)
 
+addBookBtn.addEventListener('click', () => {
+  dialogEl.show()
+})
+
+dialogConfirmBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  addBookToLibrary()
+  dialogEl.close()
+})
+
 myLibrary.forEach((book) => {
   addBookToDOM(book)
 })
+

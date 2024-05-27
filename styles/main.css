@@ -23,3 +23,13 @@ body {
   /* border: 2px solid pink; */
   width: 100%;
 }
+
+dialog {
+  height: 50vh;
+  width: 50vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
