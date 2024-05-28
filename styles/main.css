@@ -33,3 +33,8 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.remove-book-btn {
+  position: relative;
+  transform: translateY(-100);
+}

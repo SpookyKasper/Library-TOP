@@ -6,6 +6,7 @@ const dialogEl = document.querySelector('dialog')
 const dialogFormEl = document.querySelector('.dialog-form')
 const dialogConfirmBtn = document.getElementById('confirmBtn')
 const addBookBtn = document.getElementById('addBookBtn')
+const removeBookBtn = document.querySelector('.remove-book-btn')
 
 class Book {
   constructor(title, author, pages, read) {
@@ -29,28 +30,51 @@ function addBookToLibrary() {
   addBookToDOM(book)
 }
 
-function createBookEl() {
+function createBookEl(book) {
   let bookEl = document.createElement('div')
+  bookEl.dataset.libraryIndex = myLibrary.indexOf(book)
   bookEl.className = 'book'
   return bookEl
 }
 
+function createRemoveBookBtn() {
+  let buttonEl = document.createElement('button')
+  buttonEl.className = 'remove-book-btn'
+  buttonEl.textContent = 'X'
+  buttonEl.addEventListener(('click'), function() {
+    console.log(this)
+  })
+  return buttonEl
+}
+
 function addBookToDOM(book) {
-  let bookEl = createBookEl()
+  let bookEl = createBookEl(book)
+  console.log(bookEl.dataset)
+  let removeBookBtn = createRemoveBookBtn()
   for (let [key, value] of Object.entries(book)) {
     let propertyEl = document.createElement('span')
     propertyEl.className = key
     propertyEl.textContent = `${key}: ${value}`
     bookEl.appendChild(propertyEl)
   }
+  bookEl.appendChild(removeBookBtn)
   libraryEl.appendChild(bookEl)
 }
 
-let coolBook = new Book('Dark Materials', 'Philip Pullman')
-let lameBook = new Book('Lamo', 'Boring Boris')
+const myCoolBook = new Book('Dark Material', 'Philip Pullman', 1200, 'Yes')
+const myLameBook = new Book('Lamo Lame', 'Boris Boring', 3250, 'No')
 
-myLibrary.push(coolBook)
-myLibrary.push(lameBook)
+myLibrary.push(myCoolBook)
+myLibrary.push(myLameBook)
+
+console.log(myLibrary.length)
+// given a button in a book element
+// get the value of the data-library-index
+// remove the element from the dom
+// remove the book at that index from the library
+
+function removeBook(book) {
+}
 
 addBookBtn.addEventListener('click', () => {
   dialogEl.show()
@@ -62,7 +86,11 @@ dialogConfirmBtn.addEventListener('click', (e) => {
   dialogEl.close()
 })
 
-myLibrary.forEach((book) => {
+
+function displayBooks() {
+  myLibrary.forEach((book) => {
   addBookToDOM(book)
 })
+}
 
+displayBooks()
