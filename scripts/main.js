@@ -86,7 +86,7 @@ function addBookPropertiesToBookEl(book, bookEl) {
     let bookDataKeyEl = document.createElement('span')
     let bookDataValueEl = document.createElement('span')
     bookDataRowEl.className = key
-    bookDataKeyEl.textContent = `${key}: `
+    bookDataKeyEl.textContent = `${capitalize(key)}: `
     bookDataValueEl.textContent = value
     bookDataRowEl.appendChild(bookDataKeyEl)
     bookDataRowEl.appendChild(bookDataValueEl)
@@ -96,8 +96,14 @@ function addBookPropertiesToBookEl(book, bookEl) {
 
 function toggleYesNo(value) {
   let result
-  value == 'Yes' ? result = 'No' : result = 'Yes'
-  return result
+  value.toLowerCase() === 'yes' ? result = 'no' : result = 'yes'
+  return capitalize(result)
+}
+
+function capitalize(string) {
+  let firstLetter = string[0]
+  let remaining = string.slice(1)
+  return `${firstLetter.toUpperCase()}${remaining}`
 }
 
 // Display form to add a book
@@ -120,5 +126,3 @@ function displayBooks() {
 }
 
 displayBooks()
-
-myCoolBook.toggleRead()
