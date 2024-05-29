@@ -87,7 +87,7 @@ function addBookPropertiesToBookEl(book, bookEl) {
     let bookDataValueEl = document.createElement('span')
     bookDataRowEl.className = key
     bookDataKeyEl.textContent = `${normalizeString(key)}: `
-    bookDataValueEl.textContent = value
+    bookDataValueEl.textContent = normalizeString(value.toString())
     bookDataRowEl.appendChild(bookDataKeyEl)
     bookDataRowEl.appendChild(bookDataValueEl)
     bookEl.appendChild(bookDataRowEl)
