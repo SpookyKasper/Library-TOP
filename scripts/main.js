@@ -62,10 +62,11 @@ function createToggleReadBtn(book, bookEl) {
   let toggleBtnEl = document.createElement('button')
   let readEl = bookEl.querySelector('.read')
   toggleBtnEl.className = 'toggle-read-btn'
-  toggleBtnEl.textContent = 'toggle'
+  toggleBtnEl.textContent = book.read
   toggleBtnEl.addEventListener(('click'), () => {
     readEl.lastChild.textContent = normalizeString(toggleYesNo(readEl.lastChild.textContent))
     book.toggleRead()
+    console.log(book)
   })
   return  toggleBtnEl
 }
@@ -73,10 +74,12 @@ function createToggleReadBtn(book, bookEl) {
 function addBookToDOM(book) {
   let bookEl = createBookEl(book)
   addBookPropertiesToBookEl(book, bookEl)
+  let readEl = bookEl.querySelector('.read')
+  readEl.lastChild.innerHTML = ''
   let removeBookBtnEl = createRemoveBookBtn(bookEl)
   let toggleReadEl = createToggleReadBtn(book, bookEl)
   bookEl.appendChild(removeBookBtnEl)
-  bookEl.appendChild(toggleReadEl)
+  readEl.appendChild(toggleReadEl)
   libraryEl.appendChild(bookEl)
 }
 
