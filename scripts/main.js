@@ -16,7 +16,6 @@ class Book {
 
   toggleRead() {
     this.read = toggleYesNo(this.read)
-    console.log(this.read)
   }
 }
 
@@ -65,7 +64,7 @@ function createToggleReadBtn(book, bookEl) {
   toggleBtnEl.className = 'toggle-read-btn'
   toggleBtnEl.textContent = 'toggle'
   toggleBtnEl.addEventListener(('click'), () => {
-    readEl.lastChild.textContent = capitalize(toggleYesNo(readEl.lastChild.textContent))
+    readEl.lastChild.textContent = normalizeString(toggleYesNo(readEl.lastChild.textContent))
     book.toggleRead()
   })
   return  toggleBtnEl
@@ -87,7 +86,7 @@ function addBookPropertiesToBookEl(book, bookEl) {
     let bookDataKeyEl = document.createElement('span')
     let bookDataValueEl = document.createElement('span')
     bookDataRowEl.className = key
-    bookDataKeyEl.textContent = `${capitalize(key)}: `
+    bookDataKeyEl.textContent = `${normalizeString(key)}: `
     bookDataValueEl.textContent = value
     bookDataRowEl.appendChild(bookDataKeyEl)
     bookDataRowEl.appendChild(bookDataValueEl)
@@ -100,9 +99,9 @@ function toggleYesNo(value) {
   return value
 }
 
-function capitalize(string) {
+function normalizeString(string) {
   let firstLetter = string[0]
-  let remaining = string.slice(1)
+  let remaining = string.slice(1).toLowerCase()
   return `${firstLetter.toUpperCase()}${remaining}`
 }
 
