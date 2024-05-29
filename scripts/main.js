@@ -13,6 +13,10 @@ class Book {
     this.pages = pages
     this.read = read
   }
+
+  toggleRead() {
+    this.read === 'yes' ? this.read = 'no' : this.read = 'yes'
+  }
 }
 
 const myLibrary = []
@@ -54,28 +58,46 @@ function createRemoveBookBtn(bookEl) {
   return buttonEl
 }
 
+function createToggleReadBtn(book, bookEl) {
+  let toggleBtnEl = document.createElement('button')
+  let readEl = bookEl.querySelector('.read')
+  toggleBtnEl.className = 'toggle-read-btn'
+  toggleBtnEl.textContent = 'toggle'
+  toggleBtnEl.addEventListener(('click'), () => {
+    readEl.lastChild.textContent = toggleYesNo(readEl.lastChild.textContent)
+    book.toggleRead()
+  })
+  return  toggleBtnEl
+}
+
 function addBookToDOM(book) {
   let bookEl = createBookEl(book)
+  addBookPropertiesToBookEl(book, bookEl)
   let removeBookBtnEl = createRemoveBookBtn(bookEl)
-  for (let [key, value] of Object.entries(book)) {
-    let propertyEl = document.createElement('span')
-    propertyEl.className = key
-    propertyEl.textContent = `${key}: ${value}`
-    bookEl.appendChild(propertyEl)
-  }
+  let toggleReadEl = createToggleReadBtn(book, bookEl)
   bookEl.appendChild(removeBookBtnEl)
+  bookEl.appendChild(toggleReadEl)
   libraryEl.appendChild(bookEl)
 }
 
-console.log(myLibrary.length)
+function addBookPropertiesToBookEl(book, bookEl) {
+  for (let [key, value] of Object.entries(book)) {
+    let bookDataRowEl = document.createElement('div')
+    let bookDataKeyEl = document.createElement('span')
+    let bookDataValueEl = document.createElement('span')
+    bookDataRowEl.className = key
+    bookDataKeyEl.textContent = `${key}: `
+    bookDataValueEl.textContent = value
+    bookDataRowEl.appendChild(bookDataKeyEl)
+    bookDataRowEl.appendChild(bookDataValueEl)
+    bookEl.appendChild(bookDataRowEl)
+  }
+}
 
-// given a button in a book element
-// get the value of the data-library-index
-// remove the element from the dom
-// remove the book at that index from the library
-// change the index of the books
-
-function removeBook(book) {
+function toggleYesNo(value) {
+  let result
+  value == 'Yes' ? result = 'No' : result = 'Yes'
+  return result
 }
 
 // Display form to add a book
@@ -98,3 +120,5 @@ function displayBooks() {
 }
 
 displayBooks()
+
+myCoolBook.toggleRead()
