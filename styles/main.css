@@ -1,3 +1,4 @@
+
 body {
   display: flex;
   flex-direction: column;
@@ -7,26 +8,40 @@ body {
 .library {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
 }
 
 .book {
+  position: relative;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
+  gap: 5px;
   align-items: center;
   border: 2px solid black;
   padding: 15px;
 }
 
 .title, .author, .pages, .read {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
   font-size: large;
-  /* border: 2px solid pink; */
   width: 100%;
+}
+
+.book-info-row :last-child {
+  min-width: 200px;
+}
+
+.book-info-row :first-child {
+  font-weight: bold;
 }
 
 dialog {
   height: 50vh;
   width: 50vh;
+  z-index: 1;
 }
 
 form {
@@ -35,6 +50,12 @@ form {
 }
 
 .remove-book-btn {
-  position: relative;
-  transform: translateY(-100);
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background-color: white;
+}
+
+button {
+  cursor: pointer;
 }

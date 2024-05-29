@@ -62,11 +62,10 @@ function createToggleReadBtn(book, bookEl) {
   let toggleBtnEl = document.createElement('button')
   let readEl = bookEl.querySelector('.read')
   toggleBtnEl.className = 'toggle-read-btn'
-  toggleBtnEl.textContent = book.read
+  toggleBtnEl.textContent = normalizeString(book.read)
   toggleBtnEl.addEventListener(('click'), () => {
     readEl.lastChild.textContent = normalizeString(toggleYesNo(readEl.lastChild.textContent))
     book.toggleRead()
-    console.log(book)
   })
   return  toggleBtnEl
 }
@@ -89,6 +88,7 @@ function addBookPropertiesToBookEl(book, bookEl) {
     let bookDataKeyEl = document.createElement('span')
     let bookDataValueEl = document.createElement('span')
     bookDataRowEl.className = key
+    bookDataRowEl.classList.add('book-info-row')
     bookDataKeyEl.textContent = `${normalizeString(key)}: `
     bookDataValueEl.textContent = normalizeString(value.toString())
     bookDataRowEl.appendChild(bookDataKeyEl)
