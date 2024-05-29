@@ -15,7 +15,8 @@ class Book {
   }
 
   toggleRead() {
-    this.read === 'yes' ? this.read = 'no' : this.read = 'yes'
+    this.read = toggleYesNo(this.read)
+    console.log(this.read)
   }
 }
 
@@ -64,7 +65,7 @@ function createToggleReadBtn(book, bookEl) {
   toggleBtnEl.className = 'toggle-read-btn'
   toggleBtnEl.textContent = 'toggle'
   toggleBtnEl.addEventListener(('click'), () => {
-    readEl.lastChild.textContent = toggleYesNo(readEl.lastChild.textContent)
+    readEl.lastChild.textContent = capitalize(toggleYesNo(readEl.lastChild.textContent))
     book.toggleRead()
   })
   return  toggleBtnEl
@@ -95,9 +96,8 @@ function addBookPropertiesToBookEl(book, bookEl) {
 }
 
 function toggleYesNo(value) {
-  let result
-  value.toLowerCase() === 'yes' ? result = 'no' : result = 'yes'
-  return capitalize(result)
+  value = value.toLowerCase() === 'yes' ? 'no' : 'yes'
+  return value
 }
 
 function capitalize(string) {
