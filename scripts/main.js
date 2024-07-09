@@ -4,6 +4,7 @@ const dialogFormEl = document.querySelector(".dialog-form");
 const dialogConfirmBtn = document.getElementById("confirmBtn");
 const addBookBtn = document.getElementById("addBookBtn");
 const removeBookBtn = document.querySelector(".remove-book-btn");
+const cancelBtn = document.querySelector("#cancel-btn");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -122,6 +123,10 @@ addBookBtn.addEventListener("click", () => {
 dialogConfirmBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addBookToLibrary();
+  dialogEl.close();
+});
+
+cancelBtn.addEventListener("click", () => {
   dialogEl.close();
 });
 
