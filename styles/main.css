@@ -1,4 +1,3 @@
-
 body {
   display: flex;
   flex-direction: column;
@@ -22,7 +21,10 @@ body {
   padding: 15px;
 }
 
-.title, .author, .pages, .read {
+.title,
+.author,
+.pages,
+.read {
   display: flex;
   justify-content: flex-end;
   gap: 5px;
@@ -58,4 +60,8 @@ form {
 
 button {
   cursor: pointer;
+}
+
+input:invalid {
+  border: 2px solid red;
 }
